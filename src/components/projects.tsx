@@ -8,7 +8,7 @@ export default function Projects() {
 
     const [mouse, setMouse] = useState({ x: 0, y: 0 });
     const [show, setShow] = useState(false);
-    const timeoutRef = useRef(null);
+    const timeoutRef = useRef<number | null>(null);
     const navigate = useNavigate();
 
 
@@ -26,8 +26,9 @@ export default function Projects() {
                     onMouseLeave={() => setShow(false)}
 
                     onMouseMove={(e) => {
-                        setShow(true),
-                        clearTimeout(timeoutRef.current),
+                        setShow(true)
+                        if(timeoutRef.current !== null)
+                        clearTimeout(timeoutRef.current)
 
                         timeoutRef.current = setTimeout(()=>{
                             setShow(false)
